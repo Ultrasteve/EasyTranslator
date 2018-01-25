@@ -35,9 +35,9 @@ function translation(word, el, e) {
     var result = "";
     GM_xmlhttpRequest({
         method: "GET",
-        url: "http://gre.kmf.com/vocab/ajaxquery?word="+word,
+        url: "https://sp1.baidu.com/5b11fzupBgM18t7jm9iCKT-xh_/sensearch/selecttext?q="+word,
         onload: function(response) {
-            result = JSON.parse(response.responseText).result.cn_trans;
+            result = JSON.parse(response.responseText).data.result[0].cont;
             console.log(result);
             if(result !== undefined) {
                 el.style.left = ""+e.pageX+"px";
