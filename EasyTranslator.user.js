@@ -37,9 +37,12 @@ function translation(word, el, e) {
         method: "GET",
         url: "https://sp1.baidu.com/5b11fzupBgM18t7jm9iCKT-xh_/sensearch/selecttext?q="+word,
         onload: function(response) {
-            result = JSON.parse(response.responseText).data.result[0].cont;
-            console.log(result);
-            if(result !== undefined) {
+            re = JSON.parse(response.responseText).data.result;
+            let result = "";
+            for(let i of re) {
+                result = result+""+i.pre+i.cont+"<br>";
+            }
+            if(result !== "") {
                 el.style.left = ""+e.pageX+"px";
                 el.style.top = ""+e.pageY+"px";
                 el.innerHTML = result;
@@ -51,7 +54,6 @@ function translation(word, el, e) {
 }
 function getWord() {
     var word = window.getSelection().toString();
-    console.log(word);
     if(word === "")
         return;
     return word;
