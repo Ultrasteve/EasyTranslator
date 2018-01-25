@@ -42,7 +42,8 @@ function translation(word, el, e) {
             for(let i of re) {
                 result = result+""+i.pre+i.cont+"<br>";
             }
-            if(result !== "") {
+            console.log(result.indexOf("undefined")>=0);
+            if(result.indexOf("undefined")<0) {
                 el.style.left = ""+e.pageX+"px";
                 el.style.top = ""+e.pageY+"px";
                 el.innerHTML = result;
@@ -68,4 +69,5 @@ function mouseCoords(ev) {
             y: ev.clientY + document.body.scrollTop - document.body.clientTop
         };
 }
+
 
