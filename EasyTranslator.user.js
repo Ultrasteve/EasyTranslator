@@ -40,7 +40,10 @@ function translation(word, el, e) {
             re = JSON.parse(response.responseText).data.result;
             let result = "";
             for(let i of re) {
-                result = result+""+i.pre+i.cont+"<br>";
+                if(i.pre != null)
+                    result = result+""+i.pre+i.cont+"<br>";
+                else
+                    result = result+""+i.cont+"<br>";
             }
             console.log(result.indexOf("undefined")>=0);
             if(result.indexOf("undefined")<0) {
@@ -69,5 +72,4 @@ function mouseCoords(ev) {
             y: ev.clientY + document.body.scrollTop - document.body.clientTop
         };
 }
-
 
