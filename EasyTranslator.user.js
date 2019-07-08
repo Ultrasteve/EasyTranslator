@@ -34,17 +34,15 @@ function translation(word, el, e) {
         return null;
     var result = "";
     GM_xmlhttpRequest({
-        method: "GET",
-        url: "https://sp1.baidu.com/5b11fzupBgM18t7jm9iCKT-xh_/sensearch/selecttext?q="+word,
+        method: "POST",
+        url: "https://fanyi.baidu.com/sug",
+        data: "kw="+word,
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
         onload: function(response) {
-            re = JSON.parse(response.responseText).data.result;
-            let result = "";
-            for(let i of re) {
-                if(i.pre != null)
-                    result = result+""+i.pre+i.cont+"<br>";
-                else
-                    result = result+""+i.cont+"<br>";
-            }
+            re = JSON.parse(response.responseText).data[0];
+            let result = re.v;
             console.log(result.indexOf("undefined")>=0);
             if(result.indexOf("undefined")<0) {
                 el.style.left = ""+e.pageX+"px";
@@ -72,4 +70,3 @@ function mouseCoords(ev) {
             y: ev.clientY + document.body.scrollTop - document.body.clientTop
         };
 }
-
