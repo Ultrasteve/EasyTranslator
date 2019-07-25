@@ -36,14 +36,13 @@ function translation(word, el, e) {
     GM_xmlhttpRequest({
         method: "POST",
         url: "https://fanyi.baidu.com/sug",
-        data: "kw="+word,
+        data: "kw="+word.trim(),
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"
         },
         onload: function(response) {
             re = JSON.parse(response.responseText).data[0];
             let result = re.v;
-            console.log(result.indexOf("undefined")>=0);
             if(result.indexOf("undefined")<0) {
                 el.style.left = ""+e.pageX+"px";
                 el.style.top = ""+e.pageY+"px";
